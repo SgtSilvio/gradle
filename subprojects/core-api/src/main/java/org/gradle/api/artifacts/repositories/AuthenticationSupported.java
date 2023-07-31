@@ -124,8 +124,38 @@ public interface AuthenticationSupported {
      */
     void credentials(Class<? extends Credentials> credentialsType);
 
+    /**
+     * Configures the credentials for this repository that will be provided by the build.
+     * <p>
+     * Credentials will be provided from Gradle properties based on {@code identity} argument.
+     * If credentials for this repository can not be resolved and the repository will be used in the current build, then the build will fail to start and point to the missing configuration.
+     *
+     * @param credentialsType one of the following credentials types:
+     * <ul>
+     * <li>{@link org.gradle.api.credentials.PasswordCredentials}</li>
+     * <li>{@link org.gradle.api.credentials.AwsCredentials}</li>
+     * <li>{@link org.gradle.api.credentials.HttpHeaderCredentials}</li>
+     * </ul>
+     * @param identity identity to be associated with the credentials.
+     * @since 8.4
+     */
     void credentials(Class<? extends Credentials> credentialsType, String identity);
 
+    /**
+     * Configures the credentials for this repository that will be provided by the build.
+     * <p>
+     * Credentials will be provided from Gradle properties based on {@code identity} argument.
+     * If credentials for this repository can not be resolved and the repository will be used in the current build, then the build will fail to start and point to the missing configuration.
+     *
+     * @param credentialsType one of the following credentials types:
+     * <ul>
+     * <li>{@link org.gradle.api.credentials.PasswordCredentials}</li>
+     * <li>{@link org.gradle.api.credentials.AwsCredentials}</li>
+     * <li>{@link org.gradle.api.credentials.HttpHeaderCredentials}</li>
+     * </ul>
+     * @param identity a provider returning the identity to be associated with the credentials.
+     * @since 8.4
+     */
     void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity);
 
     /**
