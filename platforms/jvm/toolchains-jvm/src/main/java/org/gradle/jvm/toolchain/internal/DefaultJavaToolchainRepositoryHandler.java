@@ -28,6 +28,7 @@ import org.gradle.api.internal.DefaultNamedDomainObjectList;
 import org.gradle.api.internal.artifacts.repositories.AuthenticationSupporter;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.authentication.Authentication;
 import org.gradle.internal.authentication.AuthenticationSchemeRegistry;
@@ -175,6 +176,16 @@ public class DefaultJavaToolchainRepositoryHandler implements JavaToolchainRepos
 
         @Override
         public void credentials(Class<? extends Credentials> credentialsType) {
+            throw new UnsupportedOperationException("Can't modify repositories through a read-only view");
+        }
+
+        @Override
+        public void credentials(Class<? extends Credentials> credentialsType, String identity) {
+            throw new UnsupportedOperationException("Can't modify repositories through a read-only view");
+        }
+
+        @Override
+        public void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity) {
             throw new UnsupportedOperationException("Can't modify repositories through a read-only view");
         }
 

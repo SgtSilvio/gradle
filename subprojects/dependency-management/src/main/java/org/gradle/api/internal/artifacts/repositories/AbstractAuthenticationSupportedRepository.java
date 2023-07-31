@@ -23,6 +23,7 @@ import org.gradle.api.internal.artifacts.ivyservice.ivyresolve.strategy.VersionP
 import org.gradle.api.internal.artifacts.repositories.descriptor.RepositoryDescriptor;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.authentication.Authentication;
 import org.gradle.internal.Cast;
@@ -85,6 +86,18 @@ public abstract class AbstractAuthenticationSupportedRepository<T extends Reposi
     public void credentials(Class<? extends Credentials> credentialsType) {
         invalidateDescriptor();
         delegate.credentials(credentialsType, providerFactory.provider(this::getName));
+    }
+
+    @Override
+    public void credentials(Class<? extends Credentials> credentialsType, String identity) {
+        invalidateDescriptor();
+        delegate.credentials(credentialsType, identity);
+    }
+
+    @Override
+    public void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity) {
+        invalidateDescriptor();
+        delegate.credentials(credentialsType, identity);
     }
 
     @Override

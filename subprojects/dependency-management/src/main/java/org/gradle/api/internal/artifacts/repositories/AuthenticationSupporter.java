@@ -84,6 +84,11 @@ public class AuthenticationSupporter {
         action.execute(getCredentials(credentialsType));
     }
 
+    public void credentials(Class<? extends Credentials> credentialsType, String identity) {
+        this.usesCredentials = true;
+        this.credentials.set(providerFactory.credentials(credentialsType, identity));
+    }
+
     public void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity) {
         this.usesCredentials = true;
         this.credentials.set(providerFactory.credentials(credentialsType, identity));

@@ -22,6 +22,7 @@ import org.gradle.api.artifacts.repositories.PasswordCredentials;
 import org.gradle.api.credentials.Credentials;
 import org.gradle.api.internal.artifacts.repositories.AuthenticationSupporter;
 import org.gradle.api.provider.Property;
+import org.gradle.api.provider.Provider;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.authentication.Authentication;
 import org.gradle.jvm.toolchain.JavaToolchainResolver;
@@ -87,6 +88,16 @@ public abstract class DefaultJavaToolchainRepository implements JavaToolchainRep
     @Override
     public void credentials(Class<? extends Credentials> credentialsType) {
         authenticationSupporter.credentials(credentialsType, providerFactory.provider(() -> name));
+    }
+
+    @Override
+    public void credentials(Class<? extends Credentials> credentialsType, String identity) {
+        authenticationSupporter.credentials(credentialsType, identity);
+    }
+
+    @Override
+    public void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity) {
+        authenticationSupporter.credentials(credentialsType, identity);
     }
 
     @Override

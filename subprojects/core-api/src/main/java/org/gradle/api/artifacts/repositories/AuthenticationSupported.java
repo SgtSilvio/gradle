@@ -17,6 +17,7 @@ package org.gradle.api.artifacts.repositories;
 
 import org.gradle.api.Action;
 import org.gradle.api.credentials.Credentials;
+import org.gradle.api.provider.Provider;
 import org.gradle.internal.HasInternalProtocol;
 
 /**
@@ -122,6 +123,10 @@ public interface AuthenticationSupported {
      * @since 6.6
      */
     void credentials(Class<? extends Credentials> credentialsType);
+
+    void credentials(Class<? extends Credentials> credentialsType, String identity);
+
+    void credentials(Class<? extends Credentials> credentialsType, Provider<String> identity);
 
     /**
      * <p>Configures the authentication schemes for this repository.
